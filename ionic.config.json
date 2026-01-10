@@ -1,0 +1,7 @@
+{
+  "name": "mobile-accenture",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular-standalone"
+}
