@@ -5,6 +5,7 @@ import { addIcons } from 'ionicons';
 import { albumsOutline } from 'ionicons/icons';
 import { CategoryWithCount } from '../../../core/models/category.model';
 import { CategoryCardComponent } from '../category-card/category-card.component';
+import { CategorySkeletonComponent } from '../category-skeleton/category-skeleton.component';
 
 /**
  * Componente presentacional para mostrar una grilla de categorías
@@ -14,10 +15,11 @@ import { CategoryCardComponent } from '../category-card/category-card.component'
   selector: 'app-category-grid',
   templateUrl: './category-grid.component.html',
   styleUrls: ['./category-grid.component.scss'],
-  imports: [CommonModule, IonIcon, CategoryCardComponent]
+  imports: [CommonModule, IonIcon, CategoryCardComponent, CategorySkeletonComponent]
 })
 export class CategoryGridComponent {
   @Input({ required: true }) categories: CategoryWithCount[] = [];
+  @Input() loading: boolean = false;
   
   @Output() categoryClick = new EventEmitter<CategoryWithCount>();
   @Output() categoryLongPress = new EventEmitter<{ category: CategoryWithCount; event: Event }>();

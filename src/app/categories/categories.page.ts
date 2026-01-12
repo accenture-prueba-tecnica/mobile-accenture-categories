@@ -50,6 +50,9 @@ export class CategoriesPage {
   /** Signal para el término de búsqueda */
   protected readonly searchTerm = signal<string>('');
   
+  /** Signal para el estado de carga */
+  protected readonly isLoading = this.categoryService.loading;
+  
   /** Configuración del header */
   protected readonly headerConfig: CategoryHeaderConfig = {
     title: 'Mis Tareas',

@@ -1,16 +1,21 @@
-<div class="category-grid">
-  @for (category of categories; track category.id) {
-    <app-category-card
-      [category]="category"
-      [taskCount]="category.taskCount"
-      (categoryClick)="handleCategoryClick($event)"
-      (categoryLongPress)="handleCategoryLongPress($event)"
-    />
-  } @empty {
-    <div class="empty-state">
-      <ion-icon name="albums-outline" class="empty-icon"></ion-icon>
-      <p class="empty-text">No hay categorías</p>
-      <p class="empty-subtext">Crea tu primera categoría</p>
-    </div>
-  }
-</div>
+@if (loading) {
+  <!-- Skeleton loader mientras se cargan las categorías -->
+  <app-category-skeleton [count]="6" />
+} @else {
+  <div class="category-grid">
+    @for (category of categories; track category.id) {
+      <app-category-card
+        [category]="category"
+        [taskCount]="category.taskCount"
+        (categoryClick)="handleCategoryClick($event)"
+        (categoryLongPress)="handleCategoryLongPress($event)"
+      />
+    } @empty {
+      <div class="empty-state">
+        <ion-icon name="albums-outline" class="empty-icon"></ion-icon>
+        <p class="empty-text">No hay categorías</p>
+        <p class="empty-subtext">Crea tu primera categoría</p>
+      </div>
+    }
+  </div>
+}

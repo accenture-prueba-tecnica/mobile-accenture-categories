@@ -34,8 +34,14 @@ export class FirebaseCategoryService {
   /** Signal privado con estado writable */
   private readonly categoriesSignal = signal<Category[]>([]);
   
+  /** Signal para el estado de carga */
+  private readonly loadingSignal = signal<boolean>(true);
+  
   /** Signal público de solo lectura */
   public readonly categories = this.categoriesSignal.asReadonly();
+  
+  /** Signal público para el estado de carga */
+  public readonly loading = this.loadingSignal.asReadonly();
   
   /** Computed signal con el conteo de categorías */
   public readonly categoryCount = computed(() => this.categories().length);
@@ -55,13 +61,17 @@ export class FirebaseCategoryService {
    * Carga las categorías desde Firestore con sincronización en tiempo real
    */
   private loadCategories(): void {
+    this.loadingSignal.set(true);
+    
     this.getCategories$().subscribe({
       next: (categories) => {
         this.categoriesSignal.set(categories);
+        this.loadingSignal.set(false);
       },
       error: (error) => {
         console.error('Error al cargar categorías desde Firestore:', error);
         this.categoriesSignal.set([]);
+        this.loadingSignal.set(false);
       }
     });
   }

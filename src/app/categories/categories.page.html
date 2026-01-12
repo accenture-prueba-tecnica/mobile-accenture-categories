@@ -14,6 +14,7 @@
   <!-- Grid de categorías granular -->
   <app-category-grid
     [categories]="filteredCategories()"
+    [loading]="isLoading()"
     (categoryClick)="onCategoryClick($event)"
     (categoryLongPress)="onCategoryLongPress($event)"
   />
