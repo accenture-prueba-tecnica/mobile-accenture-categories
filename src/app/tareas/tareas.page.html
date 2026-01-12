@@ -1,10 +1,10 @@
-<!-- Header granular -->
-<app-task-header 
-  [config]="headerConfig"
-  (backClick)="onHeaderBackClick()"
-/>
-
 <ion-content [fullscreen]="true">
+  <!-- Header granular dentro del content -->
+  <app-task-header 
+    [config]="headerConfig"
+    (backClick)="onHeaderBackClick()"
+  />
+  
   <!-- Lista de tareas granular -->
   <app-task-list
     [tasks]="tasks()"

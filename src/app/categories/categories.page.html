@@ -1,10 +1,10 @@
-<!-- Header granular -->
-<app-category-header 
-  [config]="headerConfig"
-  (backClick)="onHeaderBackClick()"
-/>
-
 <ion-content [fullscreen]="true">
+  <!-- Header granular dentro del content -->
+  <app-category-header 
+    [config]="headerConfig"
+    (backClick)="onHeaderBackClick()"
+  />
+  
   <!-- Búsqueda granular -->
   <app-category-search
     [value]="searchTerm()"

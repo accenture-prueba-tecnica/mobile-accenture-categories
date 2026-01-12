@@ -1,27 +1,29 @@
-ion-header {
+.custom-header {
   background: var(--ion-background-color);
-  
-  ion-toolbar {
-    --background: transparent;
-    --padding-top: 10px;
-    --padding-bottom: 2px;
-    --padding-start: 16px;
-    --padding-end: 16px;
-    
-    ion-title {
-      font-size: 34px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      line-height: 41px;
-      color: var(--ion-text-color);
-      padding: 0;
-    }
+  padding: 16px 16px 8px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 
-    ion-buttons {
-      ion-button {
-        --color: var(--ion-color-primary);
-        font-size: 20px;
-      }
-    }
-  }
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.custom-title {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 41px;
+  color: var(--ion-text-color);
+  padding: 0;
+  padding-bottom: 4px;
+  margin: 0;
+}
+
+.back-button {
+  --color: var(--ion-color-primary);
+  font-size: 20px;
+  margin-right: 8px;
 }

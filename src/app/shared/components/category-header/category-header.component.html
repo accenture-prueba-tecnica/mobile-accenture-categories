@@ -1,12 +1,14 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar class="custom-toolbar">
-    <ion-buttons slot="start">
-      @if (config.showBackButton) {
-        <ion-button (click)="handleBackClick()">
-          <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
-        </ion-button>
-      }
-    </ion-buttons>
-    <ion-title class="custom-title">{{ config.title }}</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="custom-header">
+  <div class="header-content">
+    @if (config.showBackButton) {
+      <ion-button 
+        fill="clear"
+        class="back-button"
+        (click)="handleBackClick()"
+      >
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    }
+    <h1 class="custom-title">{{ config.title }}</h1>
+  </div>
+</div>
