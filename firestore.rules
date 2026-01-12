@@ -1,0 +1,25 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Reglas para la colección de tareas
+    match /tasks/{taskId} {
+      // Permitir lectura y escritura a todos (SOLO PARA DESARROLLO)
+      // TODO: Implementar autenticación y restringir acceso por usuario
+      allow read, write: if true;
+    }
+    
+    // Reglas para la colección de categorías
+    match /categories/{categoryId} {
+      // Permitir lectura y escritura a todos (SOLO PARA DESARROLLO)
+      // TODO: Implementar autenticación y restringir acceso por usuario
+      allow read, write: if true;
+    }
+    
+    // Denegar acceso a cualquier otra colección no especificada
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
