@@ -1,9 +1,9 @@
-import { Injectable, signal, computed } from '@angular/core';
-import { Task, CreateTaskDto, UpdateTaskDto } from '../models/task.model';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { Task, CreateTaskDto, UpdateTaskDto, TaskStats } from '../models/task.model';
 
 /**
  * Servicio para gestionar las tareas de la aplicación
- * Implementa el patrón Repository con Signals de Angular
+ * Implementa el patrón Repository con Signals de Angular 20 y función inject
  */
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class TaskService {
   private readonly STORAGE_KEY = 'tasks';
   
   /** Signal privado con estado writable */
-  private tasksSignal = signal<Task[]>([]);
+  private readonly tasksSignal = signal<Task[]>([]);
   
   /** Signal público de solo lectura */
   public readonly tasks = this.tasksSignal.asReadonly();
@@ -22,13 +22,20 @@ export class TaskService {
   
   /** Computed signal con el conteo de tareas completadas */
   public readonly completedCount = computed(() => 
-    this.tasks().filter(t => t.completed).length
+    this.tasks().filter(task => task.completed).length
   );
   
   /** Computed signal con el conteo de tareas pendientes */
   public readonly pendingCount = computed(() => 
-    this.tasks().filter(t => !t.completed).length
+    this.tasks().filter(task => !task.completed).length
   );
+
+  /** Computed signal con las estadísticas de tareas */
+  public readonly taskStats = computed<TaskStats>(() => ({
+    total: this.taskCount(),
+    completed: this.completedCount(),
+    pending: this.pendingCount()
+  }));
 
   constructor() {
     this.loadTasks();

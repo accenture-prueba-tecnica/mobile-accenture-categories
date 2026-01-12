@@ -1,0 +1,26 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="header-toolbar">
+    <div class="header-content">
+      <div class="header-left">
+        @if (config().showBackButton) {
+          <ion-button 
+            fill="clear" 
+            class="back-button"
+            (click)="onBackClick()"
+          >
+            <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+            <span>Mis Tareas</span>
+          </ion-button>
+        }
+      </div>
+      
+      <ion-title class="header-title">
+        {{ config().title }}
+      </ion-title>
+      
+      <div class="header-right">
+        <!-- Espacio vacío para mantener el título centrado -->
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>

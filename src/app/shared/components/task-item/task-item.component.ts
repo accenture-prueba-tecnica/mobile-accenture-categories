@@ -7,7 +7,8 @@ import { Task } from '../../../core/models/task.model';
 
 /**
  * Componente presentacional para mostrar una tarea individual
- * Implementa el patrón Dumb Component usando signals de Angular
+ * Implementa el patrón Dumb Component usando signals de Angular 20
+ * Aplica las mejores prácticas de granularidad y reutilización
  */
 @Component({
   selector: 'app-task-item',
@@ -18,16 +19,16 @@ import { Task } from '../../../core/models/task.model';
 })
 export class TaskItemComponent {
   /** Signal input para la tarea a mostrar */
-  task = input.required<Task>();
+  readonly task = input.required<Task>();
   
   /** Signal input para indicar si la tarea está seleccionada */
-  selected = input(false);
+  readonly selected = input(false);
 
   /** Output event cuando se hace toggle en el checkbox */
-  taskToggle = output<Task>();
+  readonly taskToggle = output<Task>();
   
   /** Output event cuando se abren las opciones */
-  optionsClick = output<{ task: Task; event: Event }>();
+  readonly optionsClick = output<{ task: Task; event: Event }>();
 
   constructor() {
     addIcons({
@@ -37,16 +38,16 @@ export class TaskItemComponent {
   }
 
   /**
-   * Maneja el click en el checkbox
+   * Maneja el click en el checkbox de la tarea
    */
-  onToggle(): void {
+  protected onTaskClick(): void {
     this.taskToggle.emit(this.task());
   }
 
   /**
    * Maneja el click en el botón de opciones
    */
-  onOptionsClick(event: Event): void {
+  protected onOptionsClick(event: Event): void {
     this.optionsClick.emit({ task: this.task(), event });
   }
 }

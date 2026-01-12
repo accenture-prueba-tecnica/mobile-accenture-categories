@@ -1,0 +1,24 @@
+<div class="task-list-container">
+  @if (hasTasks()) {
+    @for (task of tasks(); track trackByTaskId($index, task)) {
+      <div 
+        class="task-wrapper"
+        [class.task-selected]="selectedTask()?.id === task.id"
+      >
+        <app-task-item
+          [task]="task"
+          [selected]="selectedTask()?.id === task.id"
+          (taskToggle)="onTaskToggle($event)"
+          (optionsClick)="onTaskOptions($event)"
+        />
+      </div>
+    }
+  } @else {
+    <div class="empty-state">
+      <div class="empty-state-content">
+        <p class="empty-title">No hay tareas aún</p>
+        <p class="empty-subtitle">Agrega tu primera tarea para comenzar</p>
+      </div>
+    </div>
+  }
+</div>

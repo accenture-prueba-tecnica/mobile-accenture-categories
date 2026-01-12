@@ -1,94 +1,32 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar class="header-toolbar">
-    <div class="header-content">
-      <div class="header-left">
-        <ion-button fill="clear" class="back-button">
-          <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
-          <span>Mis Tareas</span>
-        </ion-button>
-      </div>
-      
-      <ion-title class="header-title">
-        Trabajo
-      </ion-title>
-      
-      <div class="header-right">
-        <!-- Espacio vacío para mantener el título centrado -->
-      </div>
-    </div>
-  </ion-toolbar>
-</ion-header>
+<!-- Header granular -->
+<app-task-header 
+  [config]="headerConfig"
+  (backClick)="onHeaderBackClick()"
+/>
 
 <ion-content [fullscreen]="true">
-  <!-- Lista de tareas -->
-  <div class="tasks-container">
-    @for (task of tasks(); track task.id) {
-      <div 
-        class="task-item"
-        [class.task-selected]="selectedTask()?.id === task.id"
-      >
-        <div class="task-content" (click)="toggleTask(task)">
-          <!-- Checkbox -->
-          <div class="task-checkbox-wrapper">
-            <div 
-              class="task-checkbox"
-              [class.task-checkbox-checked]="task.completed"
-            >
-              @if (task.completed) {
-                <ion-icon 
-                  name="checkmark"
-                  class="check-icon"
-                ></ion-icon>
-              }
-            </div>
-          </div>
-
-          <!-- Descripción de la tarea -->
-          <div class="task-description-wrapper">
-            <p 
-              class="task-description"
-              [class.task-completed]="task.completed"
-            >
-              {{ task.description }}
-            </p>
-          </div>
-        </div>
-        
-        <!-- Botón de opciones -->
-        <ion-button 
-          fill="clear" 
-          class="task-more-button"
-          (click)="openTaskOptions(task, $event)"
-        >
-          <ion-icon name="ellipsis-horizontal"></ion-icon>
-        </ion-button>
-      </div>
-    }
-
-    <!-- Botón para agregar nueva tarea -->
-    <div class="task-item add-task-item" (click)="addNewTask()">
-      <div class="task-content">
-        <div class="task-checkbox-wrapper">
-          <div class="task-checkbox-placeholder"></div>
-        </div>
-        <div class="task-description-wrapper">
-          <p class="task-description-placeholder">
-            Añadir nueva tarea...
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Lista de tareas granular -->
+  <app-task-list
+    [tasks]="tasks()"
+    [selectedTask]="selectedTask()"
+    (taskToggle)="onTaskToggle($event)"
+    (taskOptions)="onTaskOptions($event)"
+  />
+  
+  <!-- Botón para agregar nueva tarea -->
+  <app-add-task-button
+    (addTaskClick)="onAddNewTask()"
+  />
 
   <!-- Espaciador inferior -->
   <div class="bottom-spacer"></div>
 </ion-content>
 
-<!-- Action Sheet para opciones de tarea -->
-<ion-action-sheet
+<!-- Action Sheet granular para opciones de tarea -->
+<app-task-options
   [isOpen]="isActionSheetOpen()"
-  (didDismiss)="closeActionSheet()"
-  cssClass="task-action-sheet"
-  [buttons]="actionSheetButtons"
->
-</ion-action-sheet>
+  [selectedTask]="selectedTask()"
+  (dismiss)="onActionSheetDismiss()"
+  (editTask)="onEditTask($event)"
+  (deleteTask)="onDeleteTask($event)"
+/>

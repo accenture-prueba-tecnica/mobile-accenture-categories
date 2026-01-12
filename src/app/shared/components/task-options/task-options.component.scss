@@ -1,0 +1,32 @@
+.task-action-sheet {
+  --background: #ffffff;
+  
+  .action-sheet-button {
+    --background: transparent;
+    --background-activated: #e5e5ea;
+    --color: #007AFF;
+    font-size: 20px;
+    font-weight: 400;
+    
+    &.action-sheet-destructive {
+      --color: #FF3B30;
+    }
+    
+    &.action-sheet-cancel {
+      --color: #007AFF;
+      font-weight: 600;
+      --background: transparent;
+      --background-activated: #e5e5ea;
+      --background-hover: transparent;
+    }
+  }
+  
+  .action-sheet-icon {
+    color: #8e8e93;
+    margin-right: 12px;
+  }
+  
+  .action-sheet-destructive .action-sheet-icon {
+    color: #FF3B30;
+  }
+}

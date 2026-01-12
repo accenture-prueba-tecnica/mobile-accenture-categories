@@ -3,32 +3,59 @@
  */
 export interface Task {
   /** Identificador único de la tarea */
-  id: string;
+  readonly id: string;
   
   /** Descripción o título de la tarea */
-  description: string;
+  readonly description: string;
   
   /** Estado de completado de la tarea */
-  completed: boolean;
+  readonly completed: boolean;
   
   /** Fecha de creación de la tarea */
-  createdAt: Date;
+  readonly createdAt: Date;
   
   /** Fecha de última actualización */
-  updatedAt: Date;
+  readonly updatedAt: Date;
 }
 
 /**
  * DTO para crear una nueva tarea
  */
 export interface CreateTaskDto {
-  description: string;
+  readonly description: string;
 }
 
 /**
  * DTO para actualizar una tarea existente
  */
 export interface UpdateTaskDto {
-  description?: string;
-  completed?: boolean;
+  readonly description?: string;
+  readonly completed?: boolean;
+}
+
+/**
+ * Configuración de estado para el header de tareas
+ */
+export interface TaskHeaderConfig {
+  readonly title: string;
+  readonly showBackButton: boolean;
+}
+
+/**
+ * Configuración para los botones del action sheet de opciones
+ */
+export interface TaskActionConfig {
+  readonly text: string;
+  readonly icon: string;
+  readonly role?: 'destructive' | 'cancel';
+  readonly handler?: () => void;
+}
+
+/**
+ * Estado de las estadísticas de tareas para visualización
+ */
+export interface TaskStats {
+  readonly total: number;
+  readonly completed: number;
+  readonly pending: number;
 }
