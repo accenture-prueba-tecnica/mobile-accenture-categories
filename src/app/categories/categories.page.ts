@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { IonContent } from '@ionic/angular/standalone';
 
 import { CategoryWithCount, CategoryHeaderConfig } from '../core/models/category.model';
-import { CategoryService } from '../core/services/category.service';
+import { FirebaseCategoryService } from '../core/services/firebase-category.service';
 import { CategoryDialogService } from '../core/services/category-dialog.service';
 import { FirebaseTaskService } from '../core/services/firebase-task.service';
 
@@ -36,7 +36,7 @@ import { CategoryOptionsComponent } from '../shared/components/category-options/
 })
 export class CategoriesPage {
   // Inyección usando la función inject (Angular 20 best practice)
-  private readonly categoryService = inject(CategoryService);
+  private readonly categoryService = inject(FirebaseCategoryService);
   private readonly categoryDialogService = inject(CategoryDialogService);
   private readonly taskService = inject(FirebaseTaskService);
   private readonly router = inject(Router);
@@ -141,7 +141,7 @@ export class CategoriesPage {
     const categoryData = await this.categoryDialogService.showCreateCategoryDialog();
     
     if (categoryData) {
-      this.categoryService.createCategory(categoryData);
+      await this.categoryService.createCategory(categoryData);
     }
   }
 
@@ -154,7 +154,7 @@ export class CategoriesPage {
     const updateData = await this.categoryDialogService.showEditCategoryDialog(category.name);
     
     if (updateData) {
-      this.categoryService.updateCategory(category.id, updateData);
+      await this.categoryService.updateCategory(category.id, updateData);
     }
     
     this.selectedCategory.set(null);
@@ -169,7 +169,7 @@ export class CategoriesPage {
     const confirmed = await this.categoryDialogService.showDeleteCategoryConfirmation(category.name);
     
     if (confirmed) {
-      const success = this.categoryService.deleteCategory(category.id);
+      const success = await this.categoryService.deleteCategory(category.id);
       
       if (!success) {
         await this.categoryDialogService.showErrorAlert(

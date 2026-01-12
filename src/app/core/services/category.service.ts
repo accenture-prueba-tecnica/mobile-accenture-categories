@@ -36,7 +36,6 @@ export class CategoryService {
 
   constructor() {
     this.loadCategories();
-    this.initializeDefaultCategories();
   }
 
   /**
@@ -143,54 +142,6 @@ export class CategoryService {
       ...category,
       taskCount: taskCounts.get(category.id) || 0
     }));
-  }
-
-  /**
-   * Inicializa categorías por defecto si no existen
-   */
-  private initializeDefaultCategories(): void {
-    if (this.categories().length === 0) {
-      const defaultCategories: CreateCategoryDto[] = [
-        { 
-          name: 'Trabajo', 
-          icon: 'work', 
-          color: '#007AFF',
-          backgroundColor: '#E3F2FD'
-        },
-        { 
-          name: 'Hogar', 
-          icon: 'home', 
-          color: '#FF9500',
-          backgroundColor: '#FFF3E0'
-        },
-        { 
-          name: 'Ideas', 
-          icon: 'lightbulb', 
-          color: '#B8860B',
-          backgroundColor: '#FFF9C4'
-        },
-        { 
-          name: 'Personal', 
-          icon: 'person', 
-          color: '#9C27B0',
-          backgroundColor: '#F3E5F5'
-        },
-        { 
-          name: 'Fitness', 
-          icon: 'fitness_center', 
-          color: '#10B981',
-          backgroundColor: '#D1FAE5'
-        },
-        { 
-          name: 'Viajes', 
-          icon: 'flight', 
-          color: '#DC2626',
-          backgroundColor: '#FEE2E2'
-        }
-      ];
-
-      defaultCategories.forEach(category => this.createCategory(category));
-    }
   }
 
   /**
