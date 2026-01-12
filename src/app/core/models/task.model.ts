@@ -11,6 +11,9 @@ export interface Task {
   /** Estado de completado de la tarea */
   readonly completed: boolean;
   
+  /** ID de la categoría asignada (opcional) */
+  readonly categoryId?: string;
+  
   /** Fecha de creación de la tarea */
   readonly createdAt: Date;
   
@@ -23,6 +26,7 @@ export interface Task {
  */
 export interface CreateTaskDto {
   readonly description: string;
+  readonly categoryId?: string;
 }
 
 /**
@@ -30,6 +34,7 @@ export interface CreateTaskDto {
  */
 export interface UpdateTaskDto {
   readonly description?: string;
+  readonly categoryId?: string;
   readonly completed?: boolean;
 }
 

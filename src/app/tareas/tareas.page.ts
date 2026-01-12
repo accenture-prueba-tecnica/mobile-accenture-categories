@@ -1,12 +1,14 @@
 import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { 
   IonContent,
-  AlertController
+  AlertController,
+  NavController
 } from '@ionic/angular/standalone';
 
 import { Task, TaskHeaderConfig } from '../core/models/task.model';
-import { TaskService } from '../core/services/task.service';
+import { FirebaseTaskService } from '../core/services/firebase-task.service';
 import { TaskDialogService } from '../core/services/task-dialog.service';
 
 // Componentes granulares
@@ -21,9 +23,9 @@ import { TaskOptionsComponent } from '../shared/components/task-options/task-opt
  * Implementa las mejores prácticas de Angular 20 con función inject y signals
  */
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-tareas',
+  templateUrl: 'tareas.page.html',
+  styleUrls: ['tareas.page.scss'],
   imports: [
     CommonModule,
     IonContent,
@@ -33,10 +35,12 @@ import { TaskOptionsComponent } from '../shared/components/task-options/task-opt
     TaskOptionsComponent
   ],
 })
-export class HomePage {
+export class TareasPage {
   // Inyección usando la función inject (Angular 20 best practice)
-  private readonly taskService = inject(TaskService);
+  private readonly taskService = inject(FirebaseTaskService);
   private readonly taskDialogService = inject(TaskDialogService);
+  private readonly router = inject(Router);
+  private readonly navController = inject(NavController);
 
   /** Signal para la tarea seleccionada */
   protected readonly selectedTask = signal<Task | null>(null);
@@ -60,8 +64,7 @@ export class HomePage {
    * Maneja el click en el botón de retroceso del header
    */
   protected onHeaderBackClick(): void {
-    // Implementar navegación hacia atrás si es necesario
-    console.log('Back button clicked');
+    this.navController.navigateBack('/categories');
   }
 
   /**
