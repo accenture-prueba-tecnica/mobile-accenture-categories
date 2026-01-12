@@ -35,6 +35,9 @@ export class TaskOptionsComponent {
   
   /** Evento cuando se selecciona eliminar tarea */
   readonly deleteTask = output<Task>();
+  
+  /** Evento cuando se selecciona cambiar categoría */
+  readonly changeCategory = output<Task>();
 
   /** Computed signal para generar los botones del action sheet */
   protected readonly actionSheetButtons = computed<ActionSheetButton[]>(() => {
@@ -47,6 +50,14 @@ export class TaskOptionsComponent {
         icon: 'create-outline',
         handler: () => {
           this.editTask.emit(task);
+          return true;
+        }
+      },
+      {
+        text: 'Cambiar de Categoría',
+        icon: 'folder-outline',
+        handler: () => {
+          this.changeCategory.emit(task);
           return true;
         }
       },

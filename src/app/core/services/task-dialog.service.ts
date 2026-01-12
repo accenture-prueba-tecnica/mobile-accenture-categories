@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
-import { AlertController } from '@ionic/angular/standalone';
+import { Injectable, inject } from '@angular/core';
+import { AlertController, ActionSheetController } from '@ionic/angular/standalone';
 import { Task, CreateTaskDto, UpdateTaskDto } from '../models/task.model';
+import { Category } from '../models/category.model';
+import { CategoryService } from './category.service';
 
 /**
  * Servicio especializado para manejar diálogos relacionados con tareas
@@ -10,8 +12,9 @@ import { Task, CreateTaskDto, UpdateTaskDto } from '../models/task.model';
   providedIn: 'root'
 })
 export class TaskDialogService {
-
-  constructor(private readonly alertController: AlertController) {}
+  private readonly alertController = inject(AlertController);
+  private readonly actionSheetController = inject(ActionSheetController);
+  private readonly categoryService = inject(CategoryService);
 
   /**
    * Muestra un diálogo para crear una nueva tarea
@@ -145,6 +148,84 @@ export class TaskDialogService {
     const result = await alert.onDidDismiss();
     
     return result.role === 'destructive';
+  }
+
+  /**
+   * Muestra un action sheet para seleccionar una categoría
+   * @param currentCategoryId ID de la categoría actual (opcional)
+   * @returns Promise que resuelve con el ID de la categoría seleccionada o null si se cancela
+   */
+  async showCategorySelector(currentCategoryId?: string): Promise<string | null> {
+    const categories = this.categoryService.getCategories();
+    
+    if (categories.length === 0) {
+      await this.showErrorAlert('No hay categorías disponibles. Crea una categoría primero.');
+      return null;
+    }
+
+    const buttons = categories.map(category => ({
+      text: category.name,
+      icon: this.getCategoryIcon(category.icon),
+      cssClass: currentCategoryId === category.id ? 'action-sheet-selected' : '',
+      data: category.id,
+      handler: () => {
+        return true;
+      }
+    }));
+
+    buttons.push({
+      text: 'Cancelar',
+      role: 'cancel',
+      icon: 'close',
+      handler: () => {
+        return true;
+      }
+    } as any);
+
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Seleccionar Categoría',
+      buttons: buttons as any,
+      cssClass: 'category-selector-action-sheet'
+    });
+
+    await actionSheet.present();
+    const result = await actionSheet.onDidDismiss();
+    
+    return result.data || null;
+  }
+
+  /**
+   * Muestra un mensaje de error
+   * @param message Mensaje de error a mostrar
+   */
+  async showErrorAlert(message: string): Promise<void> {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: message,
+      buttons: ['OK'],
+      cssClass: 'error-alert'
+    });
+
+    await alert.present();
+    await alert.onDidDismiss();
+  }
+
+  /**
+   * Convierte el nombre del icono al formato de Ionicons
+   * @param iconName Nombre del icono Material
+   * @returns Nombre del icono en formato Ionicons
+   */
+  private getCategoryIcon(iconName: string): string {
+    const iconMap: Record<string, string> = {
+      'work': 'briefcase-outline',
+      'home': 'home-outline',
+      'lightbulb': 'bulb-outline',
+      'person': 'person-outline',
+      'fitness_center': 'barbell-outline',
+      'flight': 'airplane-outline'
+    };
+    
+    return iconMap[iconName] || 'folder-outline';
   }
 
   /**

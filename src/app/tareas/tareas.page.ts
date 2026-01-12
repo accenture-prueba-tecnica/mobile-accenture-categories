@@ -129,4 +129,17 @@ export class TareasPage {
       this.taskService.deleteTask(task.id);
     }
   }
+
+  /**
+   * Cambia la categoría de una tarea
+   */
+  protected async onChangeCategory(task: Task): Promise<void> {
+    this.onActionSheetDismiss();
+    
+    const newCategoryId = await this.taskDialogService.showCategorySelector(task.categoryId);
+    
+    if (newCategoryId && newCategoryId !== task.categoryId) {
+      this.taskService.updateTask(task.id, { categoryId: newCategoryId });
+    }
+  }
 }

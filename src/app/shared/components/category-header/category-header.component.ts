@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, IonTitle } from '@ionic/angular/standalone';
+import { IonButton, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { chevronBack } from 'ionicons/icons';
 import { CategoryHeaderConfig } from '../../../core/models/category.model';
@@ -12,7 +12,7 @@ import { CategoryHeaderConfig } from '../../../core/models/category.model';
   selector: 'app-category-header',
   templateUrl: './category-header.component.html',
   styleUrls: ['./category-header.component.scss'],
-  imports: [IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, IonTitle]
+  imports: [IonButton, IonIcon]
 })
 export class CategoryHeaderComponent {
   @Input({ required: true }) config!: CategoryHeaderConfig;
