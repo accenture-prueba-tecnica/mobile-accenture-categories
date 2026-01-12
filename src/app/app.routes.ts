@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CategoriesPage } from './categories/categories.page';
 
 export const routes: Routes = [
   {
@@ -6,8 +7,12 @@ export const routes: Routes = [
     loadComponent: () => import('./tareas/tareas.page').then((m) => m.TareasPage),
   },
   {
+    path: 'categories',
+    component: CategoriesPage,
+  },
+  {
     path: '',
-    redirectTo: 'tareas',
+    redirectTo: 'categories',
     pathMatch: 'full',
   },
 ];

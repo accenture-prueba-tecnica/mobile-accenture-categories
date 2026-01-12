@@ -1,0 +1,32 @@
+.search-container {
+  padding: 8px 16px;
+
+  .search-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: rgba(118, 118, 128, 0.12);
+    border-radius: 12px;
+    height: 40px;
+    padding: 0 12px;
+    gap: 8px;
+
+    .search-icon {
+      color: var(--ion-color-medium);
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--ion-text-color);
+      font-size: 17px;
+      outline: none;
+      
+      &::placeholder {
+        color: var(--ion-color-medium);
+      }
+    }
+  }
+}

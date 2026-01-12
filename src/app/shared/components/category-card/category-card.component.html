@@ -1,0 +1,21 @@
+<div 
+  class="category-card"
+  (click)="handleClick()"
+  (press)="handleLongPress($event)"
+>
+  <div 
+    class="category-icon-container"
+    [style.background-color]="category.backgroundColor"
+  >
+    <ion-icon 
+      class="category-icon"
+      [name]="category.icon"
+      [style.color]="category.color"
+    ></ion-icon>
+  </div>
+  
+  <div class="category-info">
+    <p class="category-name">{{ category.name }}</p>
+    <p class="category-count">{{ taskCount }} {{ taskCount === 1 ? 'tarea' : 'tareas' }}</p>
+  </div>
+</div>

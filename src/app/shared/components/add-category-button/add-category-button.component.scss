@@ -1,0 +1,26 @@
+.add-category-button {
+  position: fixed;
+  bottom: 32px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  border: none;
+  box-shadow: 0 8px 16px rgba(0, 122, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 10;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  .add-icon {
+    font-size: 30px;
+    color: white;
+  }
+}

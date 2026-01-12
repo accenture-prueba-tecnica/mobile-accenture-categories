@@ -1,0 +1,45 @@
+.category-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ion-card-background, #ffffff);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  .category-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+
+    .category-icon {
+      font-size: 30px;
+    }
+  }
+
+  .category-info {
+    .category-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ion-text-color);
+      line-height: 1.2;
+      margin: 0 0 4px 0;
+    }
+
+    .category-count {
+      font-size: 14px;
+      color: var(--ion-color-medium);
+      margin: 0;
+    }
+  }
+}

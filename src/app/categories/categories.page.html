@@ -1,0 +1,37 @@
+<!-- Header granular -->
+<app-category-header 
+  [config]="headerConfig"
+  (backClick)="onHeaderBackClick()"
+/>
+
+<ion-content [fullscreen]="true">
+  <!-- Búsqueda granular -->
+  <app-category-search
+    [value]="searchTerm()"
+    (searchChange)="onSearchChange($event)"
+  />
+  
+  <!-- Grid de categorías granular -->
+  <app-category-grid
+    [categories]="filteredCategories()"
+    (categoryClick)="onCategoryClick($event)"
+    (categoryLongPress)="onCategoryLongPress($event)"
+  />
+  
+  <!-- Botón para agregar nueva categoría -->
+  <app-add-category-button
+    (addCategoryClick)="onAddNewCategory()"
+  />
+
+  <!-- Espaciador inferior -->
+  <div class="bottom-spacer"></div>
+</ion-content>
+
+<!-- Action Sheet granular para opciones de categoría -->
+<app-category-options
+  [isOpen]="isActionSheetOpen()"
+  [selectedCategory]="selectedCategory()"
+  (dismiss)="onActionSheetDismiss()"
+  (editCategory)="onEditCategory($event)"
+  (deleteCategory)="onDeleteCategory($event)"
+/>

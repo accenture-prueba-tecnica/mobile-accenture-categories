@@ -1,0 +1,35 @@
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 16px;
+
+  .empty-state {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+
+    .empty-icon {
+      font-size: 64px;
+      color: var(--ion-color-medium);
+      margin-bottom: 16px;
+    }
+
+    .empty-text {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ion-text-color);
+      margin: 0 0 8px 0;
+    }
+
+    .empty-subtext {
+      font-size: 16px;
+      color: var(--ion-color-medium);
+      margin: 0;
+    }
+  }
+}

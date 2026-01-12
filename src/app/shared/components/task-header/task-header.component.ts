@@ -1,6 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { RouterLink } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonButton, IonIcon, IonRouterLink } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { chevronBackOutline } from 'ionicons/icons';
 import { TaskHeaderConfig } from '../../../core/models/task.model';
@@ -16,11 +17,13 @@ import { TaskHeaderConfig } from '../../../core/models/task.model';
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonButton,
-    IonIcon
+    IonIcon,
+    IonRouterLink
   ]
 })
 export class TaskHeaderComponent {

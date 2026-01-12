@@ -1,0 +1,12 @@
+<div class="search-container">
+  <div class="search-wrapper">
+    <ion-icon name="search" class="search-icon"></ion-icon>
+    <input 
+      type="text" 
+      class="search-input"
+      placeholder="Buscar tareas o categorías"
+      [value]="searchTerm()"
+      (input)="onSearchInput($event)"
+    />
+  </div>
+</div>

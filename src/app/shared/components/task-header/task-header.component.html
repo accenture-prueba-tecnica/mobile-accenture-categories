@@ -6,7 +6,8 @@
           <ion-button 
             fill="clear" 
             class="back-button"
-            (click)="onBackClick()"
+            [routerLink]="['/categories']"
+            routerDirection="back"
           >
             <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
             <span>Mis Tareas</span>
